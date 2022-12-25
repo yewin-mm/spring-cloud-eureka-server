@@ -1,0 +1,28 @@
+# here, I used yml file rather than application.properties file. You can use application.properties file if you want.
+# if you use yml or yaml file, you need to know the yml format which a bit different with properties file.
+
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    #set eureka server not to register as client itself
+    registerWithEureka: false
+    fetchRegistry: false
+    serviceUrl:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+      # eureka.instance.hostname (as variable) will use localhost as we declared in above line no. 9.
+      # server.port (as variable) will be 8761 as we declared in above line no. 5.
+
+
+# You can also enable security by adding spring security dependency and add WebSecurityConfig class for secure your application.
+# Above config is for standalone eureka server, you can build eureka server as multiple instances by defining many peers (eg. peer1 instance, peer2 instance)
+
+# you can turn off eureka logs as it can be huge later.
+logging:
+  level:
+    com:
+      netflix:
+#        eureka: OFF
